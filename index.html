@@ -23323,8 +23323,7 @@ async function convertToDocx() {
       sections:[{properties:{page:{size:{width:PW,height:PH},margin:{top:MRG,right:MRG,bottom:MRG,left:MRG}}},headers:{default:docHeader},footers:{default:docFooter},children:parseMd(md)}]
     });
 
-    const buf=await Packer.toBuffer(doc);
-    const blob=new Blob([buf],{type:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
+    const blob=await Packer.toBlob(doc);
     const url=URL.createObjectURL(blob),a=document.createElement('a');
     a.href=url;a.download=fname+'.docx';a.click();URL.revokeObjectURL(url);
     showStatus('✓ 다운로드 완료','ok');
